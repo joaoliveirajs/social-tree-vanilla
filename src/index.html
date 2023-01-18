@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Social Tree</title>
+</head>
+<body onload="setUsername()">
+    <div class="container">
+        <div class="profile-box">
+            <div class="profile-circle">
+                <img src="https://avatars.githubusercontent.com/u/54157870?v=4" 
+                width="200" 
+                height="200" 
+                alt="Profile user image" 
+                id="profile-image">
+            </div>
+            <p id="profile-user" class="profile-user">@</p>
+        </div>
+        <div class="links-box">
+            <button id="link-1">ITEM 1</button>
+            <button id="link-2">ITEM 2</button>
+            <button id="link-3">ITEM 3</button>
+            <button id="link-4">ITEM 4</button>
+        </div>
+        <div class="social-box">
+            <img src="../assets/github.svg" alt="Github Icon">
+            <img src="../assets/instagram.svg" alt="Instagram Icon">
+            <img src="../assets/linkedin.svg" alt="Linkedin Icon">
+            <img src="../assets/twitch.svg" alt="Twitch Icon">
+            <img src="../assets/twitter.svg" alt="Twitter Icon">
+        </div>
+    </div>
+
+    <script>
+        async function getUser(){
+            const response = await axios.get('https://api.github.com/users/joaoliveirajs');
+            return response.data;
+        }
+
+        function setUsername(){
+        let user = getUser();
+            user.then(
+                data => {
+                    document.getElementById('profile-user').innerText =`@${data.login}`;
+                }
+            )
+        }
+    </script>
+</body>
+</html>
